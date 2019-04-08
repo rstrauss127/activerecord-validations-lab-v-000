@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   validates :summary, length: {maximum: 250}
   validates :category, inclusion: {in: %w(Fiction Non-Fiction)}
 
-  @@terms = [/Won't Believe/, /Secret/, /Guess/, /Top \d*/]
+  @@terms = [/Won't Believe/, /Secret/, /Guess/, /Top \d*/, /True/]
 
   def clickbait
     if @@terms.none? {|term| term.match(title)}

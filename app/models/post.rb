@@ -3,15 +3,14 @@ class Post < ActiveRecord::Base
   validates :content, length: {minimum: 250}
   validates :summary, length: {maximum: 250}
   validates :category, inclusion: {in: %w(Fiction Non-Fiction)}
+  validate :clickbait
 
-  def is_clickbait
-    included = false
-    @@phrases.each { |phrase| included = true if self.title && self.title.downcase =~ phrase }
-         if not included
-             errors.add(:title, "You need a more exciting title")
-         end
+  STATEMENTS = [/Won't Believe/, /Secret/, /Guess/, /Top \d*/]
+
+   def clickbait
+     if STATEMENTS.none? {|state| state.match(title)}
+       errors.add(:title, "needs to be more clickbait-y")
      end
-
-     @@phrases = [/won't believe/, /secret/, /top \d/, /guess/]
+   end
 
 end

@@ -9,5 +9,6 @@ class Post < ActiveRecord::Base
   def clickbait
     if @@terms.none? {|term| term.match(title)}
       errors.add(:title, "not clicky enough")
+    end
   end
 end

@@ -5,8 +5,8 @@ class Post < ActiveRecord::Base
   validates :category, inclusion: {in: %w(Fiction Non-Fiction)}
 
   def is_clickbait
-         included = false
-         @@phrases.each { |phrase| included = true if self.title && self.title.downcase =~ phrase }
+    included = false
+    @@phrases.each { |phrase| included = true if self.title && self.title.downcase =~ phrase }
          if not included
              errors.add(:title, "You need a more exciting title")
          end

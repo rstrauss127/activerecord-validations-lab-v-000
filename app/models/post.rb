@@ -6,7 +6,7 @@ class MyValidator < ActiveModel::Validator
       return true
     elsif post.title.include? "Guess"
       return true
-    elsif post.title.include? "True"
+    elsif post.title.include? "Top [number]"
       return true
     else
       return false
